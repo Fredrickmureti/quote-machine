@@ -9,9 +9,9 @@ const QuoteBox = ({ onNewQuote, bgColor }) => {
 
   const fetchQuotes = async () => {
     try {
-      const response = await fetch('https://type.fit/api/quotes');
-      const data = await response.json();
-      setQuotes(data);
+      const response = await fetch('https://dummyjson.com/quotes/random'); // fetch the quote
+      const data = await response.json(); 
+      setQuotes(data); 
     } catch (error) {
       console.error("Error fetching the quotes", error);
     }
@@ -33,10 +33,10 @@ const QuoteBox = ({ onNewQuote, bgColor }) => {
       <div id="quote-box">
         <div id="quote-text" className="quote-text">
           <i className="fa fa-quote-left"></i>
-          <span id="text">{currentQuote.text}</span>
+          <span id="text">{quotes.quote}</span>
         </div>
         <div id="quote-author" className="quote-author">
-          - <span id="author">{currentQuote.author || "Unknown"}</span>
+          - <span id="author">{quotes.author || "Unknown"}</span>
         </div>
         <div className="buttons">
           <a className="button" title="Tweet this quote!" id="tweet-quote" target="_blank" href="https://twitter.com/intent/tweet" rel="noopener noreferrer">
@@ -46,7 +46,7 @@ const QuoteBox = ({ onNewQuote, bgColor }) => {
           <a className="button" title="Post this quote on tumblr!" id="tumblr-quote" target="_blank" href="https://www.tumblr.com/widgets/share/tool" rel="noopener noreferrer">
           <i className="fab fa-tumblr"></i>
           </a>
-          <button className="button" id="new-quote" onClick={handleNewQuote}>New Quote</button>
+          <button className="button" id="new-quote" onClick={fetchQuotes}>New Quote</button>
         </div>
       </div>
       <div className="footer">
